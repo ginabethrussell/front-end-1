@@ -1,5 +1,7 @@
 import React from 'react';
 import { Route, Link } from 'react-router-dom';
+import PrivateRoute from './utils/PrivateRoute';
+
 import Login from './components/Login';
 import Signup from './components/Signup';
 import Creator from './components/Creator';
@@ -9,22 +11,29 @@ import './App.css';
 
 function App() {
   return (
-    <div className="App">
-      <h1>How-Tos</h1>
+    <div className="App"> 
       <nav>
-        <a href='https://tt88-how-to.netlify.app/'>Home</a>
-        <Link to='/login'>Login</Link>
-        <Link to='/signup'>Signup</Link>
-        <Link to='/howtos'>How-Tos</Link>
-        <Link to='/creator'>Creator</Link>
+        <h3>How-Tos</h3>
+        <div className='navlinks'>
+          <a href='https://tt88-how-to.netlify.app/'>Home</a>
+          <Link to='/login'>Login</Link>
+          <Link to='/signup'>Signup</Link>
+          <Link to='/howtos'>How-Tos</Link>
+          <Link to='/creator'>Creator</Link>
+        </div>
       </nav>
 
       <main>
+        <h1>How-Tos</h1>
         <Route path='/login' component={Login} />
         <Route path='/signup' component={Signup} />
+
         {/* Below will become private routes in final app */}
         <Route path='/howtos' component={HowTos} />
         <Route path='/creator' component={Creator} />
+
+        {/* <PrivateRoute path='/howtos' component={HowTos} />
+        <PrivateRoute path='/creator'component={Creator} /> */}
       </main>
     </div>
   );
