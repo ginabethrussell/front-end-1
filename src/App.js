@@ -1,23 +1,31 @@
-import logo from './logo.svg';
+import React from 'react';
+import { Route, Link } from 'react-router-dom';
+import Login from './components/Login';
+import Signup from './components/Signup';
+import Creator from './components/Creator';
+import HowTos from './components/HowTos';
+
 import './App.css';
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <h1>How-Tos</h1>
+      <nav>
+        <a href='https://tt88-how-to.netlify.app/'>Home</a>
+        <Link to='/login'>Login</Link>
+        <Link to='/signup'>Signup</Link>
+        <Link to='/howtos'>How-Tos</Link>
+        <Link to='/creator'>Creator</Link>
+      </nav>
+
+      <main>
+        <Route path='/login' component={Login} />
+        <Route path='/signup' component={Signup} />
+        {/* Below will become private routes in final app */}
+        <Route path='/howtos' component={HowTos} />
+        <Route path='/creator' component={Creator} />
+      </main>
     </div>
   );
 }
