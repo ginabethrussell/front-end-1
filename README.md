@@ -1,6 +1,14 @@
 # Build Week How To 
 [Product Vision Document](https://docs.google.com/document/d/11nPLXuvIIXRODc8R4q-oEy7gNkcC6ahP5cfVi1w_SOs/edit?usp=sharing)
 
+## Marketing Landing Page Deployment
+[https://tt88-how-to.netlify.app/](https://tt88-how-to.netlify.app/)
+
+## Frontend React Page Deployment
+[https://tt88-frontend-howto.netlify.app/](https://tt88-frontend-howto.netlify.app/)
+
+
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
