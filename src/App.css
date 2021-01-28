@@ -1,6 +1,9 @@
 .App {
   width: 100%;
   padding: 30px 50px;
+  background: linear-gradient( #625296, #e07985);
+  color: white;
+  min-height: 100vh;
 }
 
 .App nav {
@@ -15,6 +18,7 @@
   text-decoration: none;
   padding: 8px 16px;
   font-size: 1.6rem;
+  color: white;
 }
 
 .form-wrapper {
@@ -53,12 +57,13 @@
 }
 
 .form-wrapper form {
-  border: 1px solid black;
-  border-color: #c3c3c3;
+  border: 1px solid #cdcdcd;
+  color: #625296;
   padding: 20px 30px;
   border-radius: 10px;
-  box-shadow: 0 2px 2px #cdd1d3;
+  box-shadow: 0 1px 1px #cdcdcd;
   cursor: pointer;
+  background-color: white;
 }
 
 .form-wrapper .error-message {
@@ -66,4 +71,20 @@
   font-size: 1.4rem;
   text-align: center;
   color: crimson;
+}
+
+.howtos-wrapper {
+  width: 80%;
+  margin: 20px auto;
+  font-size: 1.6rem;
+ 
+}
+
+.howto-wrapper {
+  margin: 30px 50px;
+  padding: 30px 50px;
+  border: 1px solid black;
+  border-radius: 5px;
+  background: white;
+  color: #000000;
 }
