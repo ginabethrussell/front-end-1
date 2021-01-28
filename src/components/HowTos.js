@@ -1,6 +1,12 @@
 import React from 'react'
 
+// Sample Data - will come from API
+import howtos from '../data/howtos'
+import users from '../data/users'
+
 function HowTos() {
+    console.log(howtos);
+    console.log(users)
     return (
         <div>
             <p>User/Subscriber dashboard</p>
