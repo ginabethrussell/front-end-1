@@ -76,8 +76,7 @@
 .howtos-wrapper {
   width: 80%;
   margin: 20px auto;
-  font-size: 1.6rem;
- 
+  font-size: 1.6rem; 
 }
 
 .howto-wrapper {
@@ -87,4 +86,27 @@
   border-radius: 5px;
   background: white;
   color: #000000;
+}
+
+.howto-header {
+  display: flex;
+  width: 80%;
+  margin: 0 auto;
+  justify-content: space-between;
+  align-items: baseline;
+}
+
+.formgroup {
+  width: 60%;
+  display: flex;
+  align-items: baseline;
+  justify-content: flex-end;
+}
+
+.formgroup label {
+  width: 40%;
+}
+
+.formgroup label, .formgroup input {
+  font-size: 1.6rem;
 }
