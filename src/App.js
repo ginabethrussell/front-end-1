@@ -8,6 +8,7 @@ import Signup from './components/Signup';
 import Creator from './components/Creator';
 import HowTos from './components/HowTos';
 
+import logo from './logo.svg';
 import './App.css';
 
 const initialUser = {
@@ -21,8 +22,8 @@ function App() {
   const value = {user: user, setUser: setUser};
   return (
     <div className="App"> 
-      <nav>
-        <h2>How-Tos</h2>
+      <nav>  
+        <h2><img className='logo' src={logo} alt='logo' />How-Tos</h2>
         <div className='navlinks'>
           <a href='https://tt88-how-to.netlify.app/'>Home</a>
           <Link to='/login'>Login</Link>

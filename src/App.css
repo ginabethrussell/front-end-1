@@ -4,6 +4,7 @@
   background: linear-gradient( #625296, #e07985);
   color: white;
   min-height: 100vh;
+  font-family: 'Source Sans Pro', sans-serif;
 }
 
 .App nav {
@@ -19,6 +20,11 @@
   padding: 8px 16px;
   font-size: 1.6rem;
   color: white;
+}
+
+.App .logo {
+  width: 50px;
+  margin-right: 16px;
 }
 
 .form-wrapper {
@@ -94,6 +100,7 @@
   margin: 0 auto;
   justify-content: space-between;
   align-items: baseline;
+  font-size: 2rem;
 }
 
 .formgroup {
