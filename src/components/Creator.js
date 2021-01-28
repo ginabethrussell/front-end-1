@@ -105,22 +105,50 @@ function Creator() {
     }
 
     const handleChange = (e) => {
-        setFormValues({
-            ...formValues,
-            [e.target.name]: e.target.value
-        })
-    }
+        if (e.target.name.includes("paragraph")) {
+            const name = e.target.name;
+            const index = name.slice(9);
+            const newParagraphs = formValues.paragraphs;
+            newParagraphs[Number(index)] = e.target.value;
+            setFormValues({
+              ...formValues,
+              paragraphs: [...newParagraphs]
+            });
+          } else {
+            setFormValues({
+              ...formValues,
+              [e.target.name]: e.target.value,
+            });
+        }
+    };
+   
 
     const addParagraphField = () => {
         setFormValues({
             ...formValues,
             paragraphs: [...formValues.paragraphs, '']
+        });
+    }
+    const removeParagraphField = () => {
+        const updatedParagraphs = [...formValues.paragraphs];
+        console.log(updatedParagraphs);
+        updatedParagraphs.pop();
+        setFormValues({
+            ...formValues,
+            paragraphs: [updatedParagraphs]
         })
     }
-
+    const removeEmptyParagraphs = () => {
+        const newHowTo = formValues;
+        const filledParagraphs = formValues.paragraphs.filter((paragraph) => paragraph !== "");
+        newHowTo.paragraphs = filledParagraphs;
+        return newHowTo;
+    }
     const addHowto = (e) => {
         e.preventDefault();
+        const newHowTo = removeEmptyParagraphs();
         // submit api request to post new howto
+        console.log(newHowTo);
         setIsAdding(false);
     }
 
@@ -162,18 +190,19 @@ function Creator() {
                         </FormGroup>
                         {formValues.paragraphs.map((paragraph, index) =>(
                             <FormGroup>
-                            <Label for='paragraph'>Paragraph</Label>
+                            <Label for='paragraph'>{`Paragraph ${index + 1}`}</Label>
                             <Input type='textarea' 
                                 id='paragraph'
                                 name={`paragraph${index}`}
                                 placeholder='enter your content'
                                 value={formValues.paragraphs[index]}
                                 onChange={handleChange}
-                                required
+                           
                                 />
                             </FormGroup>
                         ) )}
-                        <Button onClick={addParagraphField}>+ paragraph</Button>
+                        <Button onClick={addParagraphField}>+</Button>
+                        
                         <Button type='submit'>Add How-To</Button>
                     </Form>
                 
