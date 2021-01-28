@@ -35,7 +35,21 @@ function Login() {
     e.preventDefault();
     console.log(userCredentials);
     // sample user credentials
-    const testCredentials = {
+    const userSubscriber = {
+      id: 1,
+      username: "user1",
+      password: "password",
+      role: "subscriber"
+    }
+       
+    const userCreator ={
+      id: 2,
+      username: "user2",
+      password: "abc123",
+      role: "creator"
+    } 
+
+    const reqresCredentials = {
       email: "lambda-student@lambda.com",
       password: "i<3Lambd4",
     };
@@ -43,19 +57,20 @@ function Login() {
     // sample token for testing
     const token = "QpwL5tke4Pnpja7X4";
     axios
-      .post("https://reqres.in/api/users", testCredentials)
+      .post("https://reqres.in/api/users", reqresCredentials)
       .then((res) => {
         // will have token from backend api
         console.log(res);
         localStorage.setItem("token", token);
         setLoginError("");
-        setUser({...user, username: userCredentials.username});
+        setUser({...user, username: userCreator.username, id: userCreator.id});
         history.push("/howtos");
       })
       .catch((err) => {
           console.log(err);
           setLoginError('User not found. Please create an account.');
       });
+      
     setUserCredentials(initialUserCredentials);
   };
 

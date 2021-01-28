@@ -3,7 +3,7 @@ import { UserContext } from '../contexts/UserContext';
 import { axiosWithAuth } from '../utils/axiosWithAuth';
 import HowTo from './HowTo';
 
-import { Label, Input, FormGroup } from 'reactstrap';
+import { Label, Input } from 'reactstrap';
 // Sample Data - will come from API
 import testHowtos from '../data/howtos'
 

@@ -13,8 +13,7 @@ import './App.css';
 
 const initialUser = {
   id: '',
-  username: '',
-  role: ''
+  username: ''
 }
 
 function App() {
