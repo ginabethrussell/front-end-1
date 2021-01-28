@@ -5,10 +5,12 @@ import axios from 'axios';
 import CreatorHowTo from './CreatorHowTo';
 import {
     Button,
+    ButtonGroup,
     Form,
     FormGroup,
     Label,
     Input,
+    Row
   } from "reactstrap";
 // Sample Data - will come from API
 import testHowtos from '../data/howtos'
@@ -129,27 +131,28 @@ function Creator() {
             paragraphs: [...formValues.paragraphs, '']
         });
     }
-    const removeParagraphField = () => {
-        const updatedParagraphs = [...formValues.paragraphs];
-        console.log(updatedParagraphs);
-        updatedParagraphs.pop();
-        setFormValues({
-            ...formValues,
-            paragraphs: [updatedParagraphs]
-        })
+    
+    const cancelAdd = () => {
+        setIsAdding(false);
+        setFormValues(initialFormValues);
     }
+
     const removeEmptyParagraphs = () => {
         const newHowTo = formValues;
         const filledParagraphs = formValues.paragraphs.filter((paragraph) => paragraph !== "");
         newHowTo.paragraphs = filledParagraphs;
         return newHowTo;
     }
+
     const addHowto = (e) => {
         e.preventDefault();
         const newHowTo = removeEmptyParagraphs();
         // submit api request to post new howto
+        // axiosWithAuth().post('route', newHowTo);
         console.log(newHowTo);
+        setCreatorHowtos([...creatorHowtos, newHowTo]);
         setIsAdding(false);
+        setFormValues(initialFormValues);
     }
 
     if (creator.role !== 'creator') {
@@ -160,7 +163,7 @@ function Creator() {
         )
     }
     return (
-        <div>
+        <div className='creator-dashboard'>
             <h2>{creator.username}'s Creator Dashboard</h2>
             {!isAdding && (<Button size='md' color='info' onClick={handleAdd}>Add a How-To</Button>)}
             {isAdding && (
@@ -191,32 +194,38 @@ function Creator() {
                         {formValues.paragraphs.map((paragraph, index) =>(
                             <FormGroup>
                             <Label for='paragraph'>{`Paragraph ${index + 1}`}</Label>
-                            <Input type='textarea' 
+                            <Input className='paragraph-input' type='textarea' 
                                 id='paragraph'
                                 name={`paragraph${index}`}
                                 placeholder='enter your content'
                                 value={formValues.paragraphs[index]}
                                 onChange={handleChange}
-                           
                                 />
                             </FormGroup>
                         ) )}
-                        <Button onClick={addParagraphField}>+</Button>
-                        
-                        <Button type='submit'>Add How-To</Button>
+                        <div className='form-controls'>
+                            <div className='top-row'>
+                                <Button color='info' size='sm' onClick={addParagraphField}>+</Button>
+                            </div>
+                            <div className='row'>
+                            <ButtonGroup>
+                                <Button color='info' onClick={cancelAdd}>Cancel</Button>
+                                <Button color='info' type='submit'>Add How-To</Button>
+                            </ButtonGroup>
+                            </div>
+                        </div>
                     </Form>
                 
                 </div>
                 
             )}
             
-            <div className='creator-howtos'> 
-                {creatorHowtos.map(howto => (
-                 <div className='creator-howto'>
-                    <CreatorHowTo key={howto.id} howto={howto} handleEdit={handleEdit} handleDelete={handleDelete}/>
-                </div>
-                ))}
-            </div>
+            {creatorHowtos.map(howto => (
+                <>
+                <CreatorHowTo key={howto.id} howto={howto} handleEdit={handleEdit} handleDelete={handleDelete}/>
+            </>
+            ))}
+        
             
             <p>Edit a tutorial</p> 
             <p>Add a tutorial</p>
