@@ -3,6 +3,7 @@ import { UserContext } from '../contexts/UserContext';
 import { axiosWithAuth } from '../utils/axiosWithAuth';
 import HowTo from './HowTo';
 
+import { Label, Input, FormGroup } from 'reactstrap';
 // Sample Data - will come from API
 import testHowtos from '../data/howtos'
 
@@ -13,6 +14,12 @@ function HowTos() {
     const [howtos, setHowtos] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
     const [error, setError] = useState('');
+    const [searchterm, setSearchterm] = useState('');
+    const [filteredHowtos, setFilteredHowtos] = useState(howtos)
+
+    const handleChange = e => {
+        setSearchterm(e.target.value);
+    }
   
     // get all howtos from the api and display when component mounts
     useEffect(()=> {
@@ -25,12 +32,24 @@ function HowTos() {
         })
         .catch(err => console.log(err))
     },[])
+
+    useEffect(() => {
+       setFilteredHowtos(howtos.filter(howto => howto.title.toLowerCase().includes(searchterm.toLowerCase())))
+    }, [searchterm, howtos])
+
+
     return (
         <div className='howtos-wrapper'>
-            <h2>Welcome {user.username}</h2>
+            <div className='howto-header'>
+                <h2>Welcome {user.username}</h2>    
+                <div className='formgroup'>
+                    <Label for='searchterm'>Search by Title</Label>
+                    <Input type='text' name='searchterm' id='searchterm' value={searchterm} onChange={handleChange}/>
+                </div>
+            </div>
             { isLoading? (<p>How-Tos are Loading</p>): (
                 <>
-                {howtos.map(howto => (
+                {filteredHowtos.map(howto => (
                     <HowTo key={howto.id} howto={howto}/>
                 ))}
                 </>
