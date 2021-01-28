@@ -13,7 +13,7 @@ function App() {
   return (
     <div className="App"> 
       <nav>
-        <h3>How-Tos</h3>
+        <h2>How-Tos</h2>
         <div className='navlinks'>
           <a href='https://tt88-how-to.netlify.app/'>Home</a>
           <Link to='/login'>Login</Link>
@@ -24,7 +24,6 @@ function App() {
       </nav>
 
       <main>
-        <h1>How-Tos</h1>
         <Route path='/login' component={Login} />
         <Route path='/signup' component={Signup} />
 
