@@ -38,11 +38,11 @@ function App() {
         <Route path='/signup' component={Signup} />
 
         {/* Below will become private routes in final app */}
-        <Route path='/howtos' component={HowTos} />
-        <Route path='/creator' component={Creator} />
+        {/* <Route path='/howtos' component={HowTos} />
+        <Route path='/creator' component={Creator} /> */}
 
-        {/* <PrivateRoute path='/howtos' component={HowTos} />
-        <PrivateRoute path='/creator'component={Creator} /> */}
+        <PrivateRoute path='/howtos' component={HowTos} />
+        <PrivateRoute path='/creator'component={Creator} />
         </UserContext.Provider>
       </main>
     </div>
