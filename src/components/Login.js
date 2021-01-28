@@ -12,8 +12,7 @@ import {
 
 const initialUserCredentials = {
   username: "",
-  password: "",
-  role: "",
+  password: ""
 };
 
 function Login() {
@@ -58,7 +57,7 @@ function Login() {
   };
 
   return (
-    <div className="login-wrapper">
+    <div className="form-wrapper">
       <h2>Login to Your Account</h2>
       <Form className="form" onSubmit={loginUser}>
         <FormGroup>

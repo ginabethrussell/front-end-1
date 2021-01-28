@@ -17,7 +17,7 @@
   font-size: 1.6rem;
 }
 
-.login-wrapper {
+.form-wrapper {
   width: 70%;
   max-width: 400px;
   margin: 50px auto;
@@ -25,34 +25,34 @@
   flex-direction: column;
 }
 
-.login-wrapper h2 {
+.form-wrapper h2 {
   font-size: 2.4rem;
   font-weight: 400;
   margin-bottom: 16px;
 }
 
-.login-wrapper input {
+.form-wrapper input, .form-wrapper select {
   font-size: 1.6rem;
   padding: 5px 8px;
 }
 
-.login-wrapper label {
+.form-wrapper label {
   font-size: 1.6rem;
 }
 
-.login-wrapper .btn-wrapper{
+.form-wrapper .btn-wrapper{
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
-.login-wrapper button {
+.form-wrapper button {
   font-size: 1.6rem;
   padding: 5px 12px;
   text-align: center;
 }
 
-.login-wrapper form {
+.form-wrapper form {
   border: 1px solid black;
   border-color: #c3c3c3;
   padding: 20px 30px;
@@ -61,7 +61,7 @@
   cursor: pointer;
 }
 
-.login-wrapper .error-message {
+.form-wrapper .error-message {
   margin: 10px 0;
   font-size: 1.4rem;
   text-align: center;
