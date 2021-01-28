@@ -32,7 +32,9 @@ function Creator() {
     const [creatorHowtos, setCreatorHowtos] = useState([]);
     const [isAdding, setIsAdding] = useState(false);
     const [isEditing, setIsEditing] = useState(false);
+    const [editingId, setEditingId] = useState('');
     const [formValues, setFormValues] = useState(initialFormValues);
+    const [buttonText, setButtonText] = useState('Add How-To');
     
     // request user from api and check for role, permission to create
     useEffect(() => {
@@ -91,8 +93,18 @@ function Creator() {
         }
     }, [creator])
 
+    useEffect(() => {
+        if (isEditing) {
+            setIsAdding(true);
+        }
+    }, [isEditing])
+
     const handleEdit = (id) => {
         console.log("creator wants to edit HowTo #", id);
+        setIsEditing(true);
+        setButtonText('Update How-To');
+        setEditingId(id);
+        setFormValues(creatorHowtos.filter(howto => howto.id === id)[0]);
     }
 
     const handleDelete = (id) => {
@@ -104,6 +116,7 @@ function Creator() {
     const handleAdd = () => {
         console.log('creator wants to add a howto');
         setIsAdding(true);
+        setIsEditing(false);
     }
 
     const handleChange = (e) => {
@@ -132,8 +145,9 @@ function Creator() {
         });
     }
     
-    const cancelAdd = () => {
+    const cancel = () => {
         setIsAdding(false);
+        setIsEditing(false);
         setFormValues(initialFormValues);
     }
 
@@ -144,14 +158,37 @@ function Creator() {
         return newHowTo;
     }
 
-    const addHowto = (e) => {
+    const addOrUpdateHowto = (e) => {
         e.preventDefault();
         const newHowTo = removeEmptyParagraphs();
-        // submit api request to post new howto
-        // axiosWithAuth().post('route', newHowTo);
-        console.log(newHowTo);
-        setCreatorHowtos([...creatorHowtos, newHowTo]);
-        setIsAdding(false);
+        if(isEditing){
+            // submit api request to update post
+            // axiosWithAuth().put('route/:id', newHowTo);
+            console.log('updating howto #', editingId);
+            const updatedHowtos = [...creatorHowtos];
+            console.log(updatedHowtos);
+            const update = updatedHowtos.map(howto => {
+                console.log(howto.id);
+                console.log(editingId);
+                console.log(howto);
+                console.log(formValues);
+                if(howto.id === editingId){
+                    return formValues;
+                }
+                return howto
+            })
+            console.log(update);
+            setCreatorHowtos(update);
+            setIsEditing(false);
+            setButtonText('Add How-To');
+            setIsAdding(false);
+        }else if(isAdding){
+            // submit api request to post new howto
+            // axiosWithAuth().post('route', newHowTo);
+            console.log(newHowTo);
+            setCreatorHowtos([...creatorHowtos, newHowTo]);
+            setIsAdding(false);
+        }
         setFormValues(initialFormValues);
     }
 
@@ -168,7 +205,7 @@ function Creator() {
             {!isAdding && (<Button size='md' color='info' onClick={handleAdd}>Add a How-To</Button>)}
             {isAdding && (
                 <div className='form-wrapper'>
-                    <Form onSubmit={addHowto}>
+                    <Form onSubmit={addOrUpdateHowto}>
                         <FormGroup>
                             <Label for='title'>Title</Label>
                             <Input type='text' 
@@ -209,8 +246,8 @@ function Creator() {
                             </div>
                             <div className='row'>
                             <ButtonGroup>
-                                <Button color='info' onClick={cancelAdd}>Cancel</Button>
-                                <Button color='info' type='submit'>Add How-To</Button>
+                                <Button color='info' onClick={cancel}>Cancel</Button>
+                                <Button color='info' type='submit'>{buttonText}</Button>
                             </ButtonGroup>
                             </div>
                         </div>
