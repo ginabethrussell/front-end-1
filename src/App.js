@@ -1,6 +1,7 @@
-import React from 'react';
+import React, {useState} from 'react';
 import { Route, Link } from 'react-router-dom';
 import PrivateRoute from './utils/PrivateRoute';
+import { UserContext } from './contexts/UserContext';
 
 import Login from './components/Login';
 import Signup from './components/Signup';
@@ -9,7 +10,15 @@ import HowTos from './components/HowTos';
 
 import './App.css';
 
+const initialUser = {
+  id: '',
+  username: '',
+  role: ''
+}
+
 function App() {
+  const [user, setUser] = useState(initialUser);
+  const value = {user: user, setUser: setUser};
   return (
     <div className="App"> 
       <nav>
@@ -24,6 +33,7 @@ function App() {
       </nav>
 
       <main>
+        <UserContext.Provider value={value}>
         <Route path='/login' component={Login} />
         <Route path='/signup' component={Signup} />
 
@@ -33,6 +43,7 @@ function App() {
 
         {/* <PrivateRoute path='/howtos' component={HowTos} />
         <PrivateRoute path='/creator'component={Creator} /> */}
+        </UserContext.Provider>
       </main>
     </div>
   );

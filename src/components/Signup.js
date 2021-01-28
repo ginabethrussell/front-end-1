@@ -1,6 +1,7 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { useHistory } from "react-router-dom";
 import axios from "axios";
+import { UserContext } from '../contexts/UserContext';
 
 import {
   Button,
@@ -21,6 +22,7 @@ function Signup() {
     initialUserCredentials
   );
   const [loginError, setLoginError] = useState("");
+  const {user, setUser} = useContext(UserContext);
   const history = useHistory();
 
   const handleChange = (e) => {
@@ -49,6 +51,7 @@ function Signup() {
         console.log(res);
         localStorage.setItem("token", token);
         setLoginError("");
+        setUser({...user, username: userCredentials.username})
         history.push("/howtos");
       })
       .catch((err) => {
@@ -97,7 +100,7 @@ function Signup() {
             </Input>
         </FormGroup>
         <div className='btn-wrapper'>
-            <Button color="primary" type="submit">
+            <Button color="info" type="submit">
                 Login
             </Button>
         </div>
