@@ -14,6 +14,7 @@ import {
   } from "reactstrap";
 // Sample Data - will come from API
 import testHowtos from '../data/howtos'
+import sadImage from '../sadImage.png';
 
 const initialCreator = {
         id: '',
@@ -105,6 +106,7 @@ function Creator() {
         setButtonText('Update How-To');
         setEditingId(id);
         setFormValues(creatorHowtos.filter(howto => howto.id === id)[0]);
+        window.scrollTo(0, 0);
     }
 
     const handleDelete = (id) => {
@@ -148,6 +150,7 @@ function Creator() {
     const cancel = () => {
         setIsAdding(false);
         setIsEditing(false);
+        setButtonText('Add How-To');
         setFormValues(initialFormValues);
     }
 
@@ -195,7 +198,8 @@ function Creator() {
     if (creator.role !== 'creator') {
         return (
             <div className='not-creator-message'>
-                You do not currently have permission to create content.
+                <img src={sadImage} width='200px' />
+                <p>You do not currently have permission to create content.</p>
             </div>
         )
     }
@@ -263,9 +267,6 @@ function Creator() {
             </>
             ))}
         
-            
-            <p>Edit a tutorial</p> 
-            <p>Add a tutorial</p>
         </div>
     )
 }
