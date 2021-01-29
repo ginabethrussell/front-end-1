@@ -1,12 +1,11 @@
 import React, { useState, useContext, useEffect } from "react";
 import { UserContext } from "../contexts/UserContext";
 import { axiosWithAuth } from "../utils/axiosWithAuth";
+import {Spinner} from 'reactstrap';
 import HowTo from "./HowTo";
-import logo from "../logo.svg";
 
 import { Label, Input } from "reactstrap";
 // Sample Data - will come from api get request for howtos
-// eslint-disable-next-line
 import testHowtos from "../data/howtos";
 
 // component will display all existing howtos for logged in user
@@ -67,17 +66,15 @@ function HowTos() {
               type="text"
               name="searchterm"
               id="searchterm"
-              placeholder="enter a keyword to search"
+              placeholder="enter a keyword"
               value={searchterm}
               onChange={handleChange}
             />
           </div>
         </div>
+        <div className='howto-wrapper'>
         {isLoading ? (
-          <div className="loading-howtos">
-            <img src={logo} alt='logo'/>
-            <span>...Loading...</span>
-          </div>
+            <p className='loading'><Spinner/> ...Loading How-Tos... <Spinner/></p>
         ) : (
           <>
             {filteredHowtos.map((howto) => (
@@ -85,6 +82,7 @@ function HowTos() {
             ))}
           </>
         )}
+        </div>
       </div>
     );
   }
