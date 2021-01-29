@@ -45,7 +45,7 @@
   margin-bottom: 16px;
 }
 
-.form-wrapper input, .form-wrapper select {
+.form-wrapper input, .form-wrapper select, .form-wrapper textarea {
   font-size: 1.6rem;
   padding: 5px 8px;
 }
@@ -83,8 +83,9 @@
   color: crimson;
 }
 
-.loading-howtos {
-  width: 100%;
+.loading {
+  width: 800px;
+  height: 500px;
   margin-top: 50px;
   display: flex;
   flex-direction: column;
@@ -92,12 +93,12 @@
   align-items: center;
 }
 
-.loading-howtos img {
+.loading img {
   width: 150px;
   margin-bottom: 25px;
 }
 
-.loading-howtos span {
+.loading span {
   font-size: 1.8rem;
   font-weight: 600;
 }
@@ -141,7 +142,7 @@
   justify-content: flex-end;
 }
 
-.howto-header {
+.howto-header, .creator-header {
   display: flex;
   width: 100%;
   margin: 0 auto;
@@ -150,6 +151,9 @@
   font-size: 1.6rem;
 }
 
+.creator-header {
+  width: 80%;
+}
 .howto-header h2 {
   font-weight: 400;
   font-size: 1.8rem;
@@ -183,6 +187,19 @@
 .creator-dashboard {
   width: 80%;
   margin: 0 auto;
+  font-size: 1.6rem;
+}
+
+.creator-dashboard button, .creator-buttons button {
+  font-size: 1.6rem !important;
+}
+.creator-dashboard h3 {
+  font-size: 1.8rem;
+  font-weight: 600;
+}
+
+.creator-dashboard h5 {
+  font-size: 1.8rem;
 }
 
 .creator-dashboard .form-wrapper {
@@ -192,6 +209,7 @@
 }
 
 .paragraph-input {
+  font-size: 1.6rem;
   min-height: 100px;
   max-height: 200px;
   overflow: auto;
@@ -214,7 +232,7 @@
   }
 }
 @media (prefers-reduced-motion: no-preference) {
-  .loading-howtos img {
+  .loading img {
     animation: Loading-logo-spin infinite 20s linear;
   }
 }
