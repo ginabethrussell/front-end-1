@@ -1,15 +1,26 @@
 import React from 'react'
+import {
+    Card, CardText, CardBody,
+    CardTitle, CardSubtitle, CardHeader
+  } from 'reactstrap';
+  
 // displays individual howto passed as props from HowTos component
 function HowTo(props) {
     const howto = props.howto;
-
+    console.log(howto)
     return (
         <div className='howto-wrapper'>
-            <h3>{howto.title}</h3>
-            <h5>{howto.author}</h5>
-            {howto.paragraphs.map(paragraph => (
-                <p>{paragraph}</p>
-            ))}
+        <Card>
+            <CardHeader>
+                <CardTitle>{howto.title}</CardTitle>
+                <CardSubtitle>{howto.author}</CardSubtitle>
+            </CardHeader>
+            <CardBody> 
+                {howto.paragraphs.map(paragraph => (
+                    <CardText>{paragraph}</CardText>
+                ))}
+            </CardBody>
+        </Card>
         </div>
     )
 }
