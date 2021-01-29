@@ -3,16 +3,17 @@ import { axiosWithAuth } from '../utils/axiosWithAuth';
 import axios from 'axios';
 import CreatorHowTo from './CreatorHowTo';
 import { UserContext } from '../contexts/UserContext';
-import sadImage from '../sadImage.png';
+import deny from '../deny.svg';
 import {
     Button,
     ButtonGroup,
     Form,
     FormGroup,
     Label,
-    Input
+    Input,
+    Spinner
   } from "reactstrap";
-import logo from '../logo.svg';
+
 
 // Sample Data - will come from API
 import testHowtos from '../data/howtos'
@@ -43,12 +44,12 @@ function Creator() {
     useEffect(() => {
         // get user with userid
         // sample users stored on server
-        // const userSubscriber = {
-        //     id: 1,
-        //     username: "user1",
-        //     password: "password",
-        //     role: "subscriber"
-        //   }
+        const userSubscriber = {
+            id: 1,
+            username: "user1",
+            password: "password",
+            role: "subscriber"
+          }
              
           const userCreator ={
             id: 2,
@@ -76,7 +77,7 @@ function Creator() {
             });
         })
         .catch(err => console.log(err))
-    }, [creator, user.id])
+    }, [])
 
     // every time user changes, if user is creator, request howtos from api
     // filter by creator.id matches user.id to list creator's howto content
@@ -193,12 +194,12 @@ function Creator() {
     }
     if (creator.role === '') {
         return (
-            <div className='loading'><img src={logo} alt='logo'/><span>...Loading...</span></div>
+            <p className='loading'><Spinner/> ...Loading Creator... <Spinner/></p>
         )
     }else if (creator.role !== 'creator') {
         return (
             <div className='not-creator-message'>
-                <img src={sadImage} alt='sad face' width='200px' />
+                <img src={deny} alt='denied icon' width='200px' />
                 <p>You do not currently have permission to create content.</p>
             </div>
         )

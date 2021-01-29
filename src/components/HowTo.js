@@ -9,7 +9,6 @@ function HowTo(props) {
     const howto = props.howto;
     console.log(howto)
     return (
-        <div className='howto-wrapper'>
         <Card>
             <CardHeader>
                 <CardTitle>{howto.title}</CardTitle>
@@ -21,7 +20,6 @@ function HowTo(props) {
                 ))}
             </CardBody>
         </Card>
-        </div>
     )
 }
 
