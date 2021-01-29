@@ -18,13 +18,15 @@ const initialUser = {
 
 function App() {
   const [user, setUser] = useState(initialUser);
+
+  // setup value for UserContext
   const value = {user: user, setUser: setUser};
+
   return (
     <div className="App"> 
       <nav>  
-        <h2><img className='logo' src={logo} alt='logo' />How-Tos</h2>
+        <h2><img className='logo' src={logo} alt='logo' /><a href='https://tt88-how-to.netlify.app/'>How-Tos</a></h2>
         <div className='navlinks'>
-          <a href='https://tt88-how-to.netlify.app/'>Home</a>
           <Link to='/login'>Login</Link>
           <Link to='/signup'>Signup</Link>
           <Link to='/howtos'>How-Tos</Link>
@@ -34,15 +36,12 @@ function App() {
 
       <main>
         <UserContext.Provider value={value}>
-        <Route path='/login' component={Login} />
-        <Route path='/signup' component={Signup} />
+          <Route path='/login' component={Login} />
+          <Route path='/signup' component={Signup} />
 
-        {/* Below will become private routes in final app */}
-        {/* <Route path='/howtos' component={HowTos} />
-        <Route path='/creator' component={Creator} /> */}
-
-        <PrivateRoute path='/howtos' component={HowTos} />
-        <PrivateRoute path='/creator'component={Creator} />
+          {/* Private routes require a token in localStorage or redirect to /login */}
+          <PrivateRoute path='/howtos' component={HowTos} />
+          <PrivateRoute path='/creator'component={Creator} />
         </UserContext.Provider>
       </main>
     </div>
