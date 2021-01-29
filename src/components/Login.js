@@ -36,12 +36,12 @@ function Login() {
     // sample user credentials
     const userSubscriber = {
       id: 1,
-      username: "user1",
+      username: "user1Subscriber",
     }
        
     const userCreator ={
       id: 2,
-      username: "user2",
+      username: "user2Creator",
     } 
 
     const reqresCredentials = {

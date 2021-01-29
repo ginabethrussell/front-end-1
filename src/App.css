@@ -18,7 +18,7 @@
 .App nav a {
   text-decoration: none;
   padding: 5px 8px;
-  font-size: 1.4rem;
+  font-size: 1.6rem;
   color: white;
 }
 
@@ -28,8 +28,9 @@
 }
 
 .App nav h2 {
-  font-size: 1.6rem;
+  font-size: 1.8rem;
 }
+
 .form-wrapper {
   width: 70%;
   max-width: 400px;
@@ -77,9 +78,28 @@
 
 .form-wrapper .error-message {
   margin: 10px 0;
-  font-size: 1.4rem;
+  font-size: 1.6rem;
   text-align: center;
   color: crimson;
+}
+
+.loading-howtos {
+  width: 100%;
+  margin-top: 50px;
+  display: flex;
+  flex-direction: column;
+  justify-content:center;
+  align-items: center;
+}
+
+.loading-howtos img {
+  width: 150px;
+  margin-bottom: 25px;
+}
+
+.loading-howtos span {
+  font-size: 1.8rem;
+  font-weight: 600;
 }
 
 .howtos-wrapper {
@@ -87,7 +107,6 @@
   max-width: 800px;
   margin: 20px auto;
   font-size: 1.6rem; 
-
 }
 
 .howto-wrapper, .creator-howto-wrapper {
@@ -114,20 +133,26 @@
   border-radius: 30%;
 }
 .not-creator-message p {
-  font-size: 2rem;
+  font-size: 1.8rem;
 }
 .creator-howto-wrapper .creator-buttons {
   margin-bottom: 20px;
   display: flex;
   justify-content: flex-end;
 }
+
 .howto-header {
   display: flex;
-  width: 80%;
+  width: 100%;
   margin: 0 auto;
   justify-content: space-between;
   align-items: baseline;
-  font-size: 2rem;
+  font-size: 1.6rem;
+}
+
+.howto-header h2 {
+  font-weight: 400;
+  font-size: 1.8rem;
 }
 
 .formgroup {
@@ -165,6 +190,7 @@
   max-width: 800px;
   margin: 25px auto;
 }
+
 .paragraph-input {
   min-height: 100px;
   max-height: 200px;
@@ -185,5 +211,20 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
+  }
+}
+@media (prefers-reduced-motion: no-preference) {
+  .loading-howtos img {
+    animation: Loading-logo-spin infinite 20s linear;
+  }
+}
+
+
+@keyframes Loading-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
   }
 }

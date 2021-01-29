@@ -37,13 +37,13 @@ function Signup() {
     console.log(userCredentials);
     // sample user credentials 
     const userSubscriber = {
-      username: "user1",
+      username: "user1Subscriber",
       password: "password",
       role: "subscriber"
     }
        
     const userCreator ={
-      username: "user2",
+      username: "user2Creator",
       password: "abc123",
       role: "creator"
     } 
