@@ -61,7 +61,8 @@ function Login() {
         console.log(res);
         localStorage.setItem("token", token);
         // setUser from userCredentials.username and id from api response
-        setUser(userSubscriber);
+        // Test with userCreator
+        setUser(userCreator);
         setLoginError("");
         // send logged in user to howtos page
         history.push("/howtos");

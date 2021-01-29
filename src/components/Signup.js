@@ -35,16 +35,14 @@ function Signup() {
   const signupUser = (e) => {
     e.preventDefault();
     console.log(userCredentials);
-    // sample user credentials
+    // sample user credentials 
     const userSubscriber = {
-      id: 1,
       username: "user1",
       password: "password",
       role: "subscriber"
     }
        
     const userCreator ={
-      id: 2,
       username: "user2",
       password: "abc123",
       role: "creator"
@@ -55,17 +53,23 @@ function Signup() {
       password: "i<3Lambd4",
       role: 'subscriber'
     };
-    // sample post request to login user
-    // sample token for testing
+   
+    // sample token for testing api
+    // sample returned data from api for testing
+    // api will return id and token
     const token = "QpwL5tke4Pnpja7X4";
+
+    // sample post request to login user
+    // use axios to post user data, response should be token and user id
     axios
       .post("https://reqres.in/api/users", reqresCredentials)
       .then((res) => {
         // will have token from backend api
+        // Test with userSubscriber
         console.log(res);
         localStorage.setItem("token", token);
         setLoginError("");
-        setUser({...user, username: userSubscriber.username, id: userSubscriber.id})
+        setUser({username: userSubscriber.username, id: 1})
         history.push("/howtos");
       })
       .catch((err) => {
