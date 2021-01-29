@@ -11,6 +11,21 @@ import HowTos from './components/HowTos';
 import logo from './logo.svg';
 import './App.css';
 
+import {
+  Collapse,
+  Navbar,
+  NavbarToggler,
+  NavbarBrand,
+  Nav,
+  NavItem,
+  NavLink,
+  UncontrolledDropdown,
+  DropdownToggle,
+  DropdownMenu,
+  DropdownItem,
+  NavbarText
+} from 'reactstrap';
+
 const initialUser = {
   id: '',
   username: ''
@@ -18,21 +33,39 @@ const initialUser = {
 
 function App() {
   const [user, setUser] = useState(initialUser);
-
+  const [isOpen, setIsOpen] = useState(false);
+  const toggle = () => setIsOpen(!isOpen);
   // setup value for UserContext
   const value = {user: user, setUser: setUser};
 
   return (
     <div className="App"> 
-      <nav>  
-        <h2><img className='logo' src={logo} alt='logo' /><a href='https://tt88-how-to.netlify.app/'>How-Tos</a></h2>
-        <div className='navlinks'>
-          <Link to='/login'>Login</Link>
-          <Link to='/signup'>Signup</Link>
-          <Link to='/howtos'>How-Tos</Link>
-          <Link to='/creator'>Creator</Link>
-        </div>
-      </nav>
+      <Navbar color="dark" dark expand='md'>  
+        <NavbarBrand>
+          <img className='logo' style={{marginRight: '8px'}}src={logo} alt='logo' />
+          <a>How-Tos</a>
+        </NavbarBrand>
+        <NavbarToggler dark onClick={toggle} />
+        <Collapse isOpen={isOpen} navbar>
+        <Nav className="ml-auto" navbar>
+          <NavItem>
+            <NavLink style={{width: '100px', textAlign: 'center'}}href='https://tt88-how-to.netlify.app/'>Home</NavLink>
+          </NavItem>
+          <NavItem style={{width: '100px', textAlign: 'center'}}>
+            <NavLink tag={Link} to="/login">Login</NavLink>
+          </NavItem>
+          <NavItem style={{width: '100px', textAlign: 'center'}}>
+            <NavLink tag={Link} to="/signup">Signup</NavLink>
+          </NavItem>
+          <NavItem style={{width: '100px', textAlign: 'center'}}>
+            <NavLink color="light" tag={Link} to="/howtos">How-Tos</NavLink>
+          </NavItem>
+          <NavItem style={{width: '100px', textAlign: 'center'}}>
+            <NavLink tag={Link} to="/creator">Creator</NavLink>
+          </NavItem>
+        </Nav>
+        </Collapse>
+      </Navbar>
 
       <main>
         <UserContext.Provider value={value}>
