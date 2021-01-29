@@ -1,36 +1,42 @@
 .App {
   width: 100%;
-  padding: 30px 50px;
   background: linear-gradient( #625296, #e07985);
   color: white;
   min-height: 100vh;
   font-family: 'Source Sans Pro', sans-serif;
 }
 
-.App nav {
+/* .App nav {
   width: 100%;
   margin: 0 auto;
   display: flex;
   justify-content: space-between;
   align-items: baseline;
-}
+} */
 
-.App nav a {
+.App a.nav-link, .App a{
   text-decoration: none;
   padding: 5px 8px;
-  font-size: 1.6rem;
+  font-size: 1.8rem; 
   color: white;
+}
+
+.App a.nav-link:hover{
+  color: gray;
 }
 
 .App .logo {
   width: 30px;
   margin-right: 5px;
 }
-
+/* 
 .App nav h2 {
   font-size: 1.8rem;
-}
+} */
 
+main {
+  padding: 30px 50px;
+}
 .form-wrapper {
   width: 70%;
   max-width: 400px;
@@ -111,7 +117,7 @@
 }
 
 .howto-wrapper, .creator-howto-wrapper {
-  padding: 30px 50px;
+  padding: 25px 25px;
   border: 1px solid #cdcdcd;
   box-shadow: 0 1px 1px #cdcdcd;
   border-radius: 5px;
@@ -137,7 +143,6 @@
   font-size: 1.8rem;
 }
 .creator-howto-wrapper .creator-buttons {
-  margin-bottom: 20px;
   display: flex;
   justify-content: flex-end;
 }
@@ -216,20 +221,16 @@
 }
 
 @media(max-width: 750px){
-  .App nav {
-    flex-direction: column;
-    align-items:center;
-    justify-content: center;
+  .App a.nav-link{
+    width: 100%!important;
+  }
+  li.nav-item {
+    width: 100%!important;
   }
 }
 
 @media(max-width: 500px){
-  .navlinks {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-  }
+ 
 }
 @media (prefers-reduced-motion: no-preference) {
   .loading img {
