@@ -22,7 +22,7 @@ function Signup() {
     initialUserCredentials
   );
   const [loginError, setLoginError] = useState("");
-  const {user, setUser} = useContext(UserContext);
+  const {setUser} = useContext(UserContext);
   const history = useHistory();
 
   const handleChange = (e) => {
@@ -42,11 +42,11 @@ function Signup() {
       role: "subscriber"
     }
        
-    const userCreator ={
-      username: "user2Creator",
-      password: "abc123",
-      role: "creator"
-    } 
+    // const userCreator ={
+    //   username: "user2Creator",
+    //   password: "abc123",
+    //   role: "creator"
+    // } 
 
     const reqresCredentials = {
       email: "lambda-student@lambda.com",
@@ -119,7 +119,7 @@ function Signup() {
         </FormGroup>
         <div className='btn-wrapper'>
             <Button color="info" type="submit">
-                Login
+                Signup
             </Button>
         </div>
         {loginError !== ''? (<p className='error-message'>{loginError}</p>): null }

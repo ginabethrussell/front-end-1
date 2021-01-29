@@ -19,7 +19,7 @@ const initialUserCredentials = {
 function Login() {
   const [userCredentials, setUserCredentials] = useState(initialUserCredentials);
   const [loginError, setLoginError] = useState("");
-  const {user, setUser} = useContext(UserContext);
+  const {setUser} = useContext(UserContext);
   const history = useHistory();
 
   const handleChange = (e) => {
@@ -34,10 +34,10 @@ function Login() {
     console.log(userCredentials);
     
     // sample user credentials
-    const userSubscriber = {
-      id: 1,
-      username: "user1Subscriber",
-    }
+    // const userSubscriber = {
+    //   id: 1,
+    //   username: "user1Subscriber",
+    // }
        
     const userCreator ={
       id: 2,

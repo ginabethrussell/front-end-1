@@ -43,12 +43,12 @@ function Creator() {
     useEffect(() => {
         // get user with userid
         // sample users stored on server
-        const userSubscriber = {
-            id: 1,
-            username: "user1",
-            password: "password",
-            role: "subscriber"
-          }
+        // const userSubscriber = {
+        //     id: 1,
+        //     username: "user1",
+        //     password: "password",
+        //     role: "subscriber"
+        //   }
              
           const userCreator ={
             id: 2,
@@ -57,8 +57,9 @@ function Creator() {
             role: "creator"
           } 
         // use user.id pulled from UserContext to request user info to verify creator permissions
-        // axiosWithAuth().get(`http://reqres.in/api/user/${user.id}`)
-        axios.get(`https://reqres.in/api/user/2`)
+        const id = user.id;
+        // axiosWithAuth().get(`http://reqres.in/api/user/${id}`)
+        axios.get(`https://reqres.in/api/user/${id}`)
         .then(res => {
             console.log(res);
             // setCreator({
@@ -75,7 +76,7 @@ function Creator() {
             });
         })
         .catch(err => console.log(err))
-    }, [])
+    }, [creator, user.id])
 
     // every time user changes, if user is creator, request howtos from api
     // filter by creator.id matches user.id to list creator's howto content
@@ -192,12 +193,12 @@ function Creator() {
     }
     if (creator.role === '') {
         return (
-            <div className='loading'><img src={logo} /><span>...Loading...</span></div>
+            <div className='loading'><img src={logo} alt='logo'/><span>...Loading...</span></div>
         )
     }else if (creator.role !== 'creator') {
         return (
             <div className='not-creator-message'>
-                <img src={sadImage} width='200px' />
+                <img src={sadImage} alt='sad face' width='200px' />
                 <p>You do not currently have permission to create content.</p>
             </div>
         )
