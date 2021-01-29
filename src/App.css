@@ -79,21 +79,40 @@
   color: crimson;
 }
 
-.howtos-wrapper, .creator-howto-wrapper {
-  width: 80%;
+.howtos-wrapper {
+  width: 100%;
+  max-width: 800px;
   margin: 20px auto;
   font-size: 1.6rem; 
+
 }
 
 .howto-wrapper, .creator-howto-wrapper {
-  margin: 30px 50px;
   padding: 30px 50px;
-  border: 1px solid black;
+  border: 1px solid #cdcdcd;
+  box-shadow: 0 1px 1px #cdcdcd;
   border-radius: 5px;
   background: white;
   color: #000000;
+  margin: 0 auto;
+  margin-top: 20px;
+  min-width: 250px;
+  max-width: 800px;
 }
 
+.not-creator-message {
+  display: flex;
+  min-height: 75vh;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.not-creator-message img {
+  border-radius: 30%;
+}
+.not-creator-message p {
+  font-size: 2rem;
+}
 .creator-howto-wrapper .creator-buttons {
   margin-bottom: 20px;
   display: flex;
@@ -121,4 +140,30 @@
 
 .formgroup label, .formgroup input {
   font-size: 1.6rem;
+}
+
+.form-controls {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end; 
+}
+
+.form-controls .top-row {
+  align-self: flex-start;
+}
+
+.creator-dashboard {
+  width: 80%;
+  margin: 0 auto;
+}
+
+.creator-dashboard .form-wrapper {
+  width: 100%;
+  max-width: 800px;
+  margin: 25px auto;
+}
+.paragraph-input {
+  min-height: 100px;
+  max-height: 200px;
+  overflow: auto;
 }
