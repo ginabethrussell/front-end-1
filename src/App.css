@@ -8,23 +8,27 @@
 }
 
 .App nav {
-  width: 80%;
+  width: 100%;
   margin: 0 auto;
   display: flex;
   justify-content: space-between;
-  align-items: center;
+  align-items: baseline;
 }
 
 .App nav a {
   text-decoration: none;
-  padding: 8px 16px;
+  padding: 5px 8px;
   font-size: 1.6rem;
   color: white;
 }
 
 .App .logo {
-  width: 50px;
-  margin-right: 16px;
+  width: 30px;
+  margin-right: 5px;
+}
+
+.App nav h2 {
+  font-size: 1.8rem;
 }
 
 .form-wrapper {
@@ -41,7 +45,7 @@
   margin-bottom: 16px;
 }
 
-.form-wrapper input, .form-wrapper select {
+.form-wrapper input, .form-wrapper select, .form-wrapper textarea {
   font-size: 1.6rem;
   padding: 5px 8px;
 }
@@ -74,9 +78,29 @@
 
 .form-wrapper .error-message {
   margin: 10px 0;
-  font-size: 1.4rem;
+  font-size: 1.6rem;
   text-align: center;
   color: crimson;
+}
+
+.loading {
+  width: 800px;
+  height: 500px;
+  margin-top: 50px;
+  display: flex;
+  flex-direction: column;
+  justify-content:center;
+  align-items: center;
+}
+
+.loading img {
+  width: 150px;
+  margin-bottom: 25px;
+}
+
+.loading span {
+  font-size: 1.8rem;
+  font-weight: 600;
 }
 
 .howtos-wrapper {
@@ -84,7 +108,6 @@
   max-width: 800px;
   margin: 20px auto;
   font-size: 1.6rem; 
-
 }
 
 .howto-wrapper, .creator-howto-wrapper {
@@ -111,20 +134,29 @@
   border-radius: 30%;
 }
 .not-creator-message p {
-  font-size: 2rem;
+  font-size: 1.8rem;
 }
 .creator-howto-wrapper .creator-buttons {
   margin-bottom: 20px;
   display: flex;
   justify-content: flex-end;
 }
-.howto-header {
+
+.howto-header, .creator-header {
   display: flex;
-  width: 80%;
+  width: 100%;
   margin: 0 auto;
   justify-content: space-between;
   align-items: baseline;
-  font-size: 2rem;
+  font-size: 1.6rem;
+}
+
+.creator-header {
+  width: 80%;
+}
+.howto-header h2 {
+  font-weight: 400;
+  font-size: 1.8rem;
 }
 
 .formgroup {
@@ -155,6 +187,19 @@
 .creator-dashboard {
   width: 80%;
   margin: 0 auto;
+  font-size: 1.6rem;
+}
+
+.creator-dashboard button, .creator-buttons button {
+  font-size: 1.6rem !important;
+}
+.creator-dashboard h3 {
+  font-size: 1.8rem;
+  font-weight: 600;
+}
+
+.creator-dashboard h5 {
+  font-size: 1.8rem;
 }
 
 .creator-dashboard .form-wrapper {
@@ -162,8 +207,42 @@
   max-width: 800px;
   margin: 25px auto;
 }
+
 .paragraph-input {
+  font-size: 1.6rem;
   min-height: 100px;
   max-height: 200px;
   overflow: auto;
+}
+
+@media(max-width: 750px){
+  .App nav {
+    flex-direction: column;
+    align-items:center;
+    justify-content: center;
+  }
+}
+
+@media(max-width: 500px){
+  .navlinks {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+}
+@media (prefers-reduced-motion: no-preference) {
+  .loading img {
+    animation: Loading-logo-spin infinite 20s linear;
+  }
+}
+
+
+@keyframes Loading-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
 }

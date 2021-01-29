@@ -1,5 +1,5 @@
 import React from 'react'
-// displays individual howto
+// displays individual howto passed as props from HowTos component
 function HowTo(props) {
     const howto = props.howto;
 

@@ -1,20 +1,21 @@
-import React, {useState, useEffect, useContext} from 'react';
-import { UserContext, userContext } from '../contexts/UserContext';
+import React, { useState, useEffect, useContext } from 'react';
 import { axiosWithAuth } from '../utils/axiosWithAuth';
 import axios from 'axios';
 import CreatorHowTo from './CreatorHowTo';
+import { UserContext } from '../contexts/UserContext';
+import sadImage from '../sadImage.png';
 import {
     Button,
     ButtonGroup,
     Form,
     FormGroup,
     Label,
-    Input,
-    Row
+    Input
   } from "reactstrap";
+import logo from '../logo.svg';
+
 // Sample Data - will come from API
 import testHowtos from '../data/howtos'
-import sadImage from '../sadImage.png';
 
 const initialCreator = {
         id: '',
@@ -27,20 +28,21 @@ const initialFormValues = {
     author: '',
     paragraphs: ['']
 }
+
 function Creator() {
-    const { user, setUser } = useContext(UserContext);
     const [creator, setCreator] = useState(initialCreator);
     const [creatorHowtos, setCreatorHowtos] = useState([]);
     const [isAdding, setIsAdding] = useState(false);
     const [isEditing, setIsEditing] = useState(false);
     const [editingId, setEditingId] = useState('');
-    const [formValues, setFormValues] = useState(initialFormValues);
     const [buttonText, setButtonText] = useState('Add How-To');
+    const [formValues, setFormValues] = useState(initialFormValues);
+    const {user} = useContext(UserContext);
     
     // request user from api and check for role, permission to create
     useEffect(() => {
         // get user with userid
-        // sample users
+        // sample users stored on server
         const userSubscriber = {
             id: 1,
             username: "user1",
@@ -54,6 +56,7 @@ function Creator() {
             password: "abc123",
             role: "creator"
           } 
+        // use user.id pulled from UserContext to request user info to verify creator permissions
         // axiosWithAuth().get(`http://reqres.in/api/user/${user.id}`)
         axios.get(`https://reqres.in/api/user/2`)
         .then(res => {
@@ -75,14 +78,13 @@ function Creator() {
     }, [])
 
     // every time user changes, if user is creator, request howtos from api
-    // filter by creator.id matches user.id to list user's howtos
+    // filter by creator.id matches user.id to list creator's howto content
     useEffect(() => {
         // get all howtos and filter for creators howtos
         if (creator.role === 'creator'){
-            axios.get('https://reqres.in/api/users')
+            axiosWithAuth().get('https://reqres.in/api/users')
             .then(res => {
                 console.log(res);
-                console.log(testHowtos);
                 console.log(creator.id);
                 const creatorHowTos = testHowtos.filter(howto => howto.creator_id === creator.id);
                 console.log(creatorHowTos);
@@ -111,6 +113,7 @@ function Creator() {
 
     const handleDelete = (id) => {
         console.log("creator wants to delete HowTo #", id);
+        // complete authorized delete request with id in route
         //axiosWithAuth().delete('https://route/id)
         setCreatorHowtos(creatorHowtos.filter(howto => howto.id !== id))
     }
@@ -139,7 +142,6 @@ function Creator() {
         }
     };
    
-
     const addParagraphField = () => {
         setFormValues({
             ...formValues,
@@ -165,22 +167,17 @@ function Creator() {
         e.preventDefault();
         const newHowTo = removeEmptyParagraphs();
         if(isEditing){
-            // submit api request to update post
+            // submit api request to update howto with put request
             // axiosWithAuth().put('route/:id', newHowTo);
             console.log('updating howto #', editingId);
             const updatedHowtos = [...creatorHowtos];
             console.log(updatedHowtos);
             const update = updatedHowtos.map(howto => {
-                console.log(howto.id);
-                console.log(editingId);
-                console.log(howto);
-                console.log(formValues);
                 if(howto.id === editingId){
                     return formValues;
                 }
                 return howto
             })
-            console.log(update);
             setCreatorHowtos(update);
             setIsEditing(false);
             setButtonText('Add How-To');
@@ -188,14 +185,16 @@ function Creator() {
         }else if(isAdding){
             // submit api request to post new howto
             // axiosWithAuth().post('route', newHowTo);
-            console.log(newHowTo);
             setCreatorHowtos([...creatorHowtos, newHowTo]);
             setIsAdding(false);
         }
         setFormValues(initialFormValues);
     }
-
-    if (creator.role !== 'creator') {
+    if (creator.role === '') {
+        return (
+            <div className='loading'><img src={logo} /><span>...Loading...</span></div>
+        )
+    }else if (creator.role !== 'creator') {
         return (
             <div className='not-creator-message'>
                 <img src={sadImage} width='200px' />
@@ -205,8 +204,10 @@ function Creator() {
     }
     return (
         <div className='creator-dashboard'>
+            <div className='creator-header'>
             <h2>{creator.username}'s Creator Dashboard</h2>
             {!isAdding && (<Button size='md' color='info' onClick={handleAdd}>Add a How-To</Button>)}
+            </div>
             {isAdding && (
                 <div className='form-wrapper'>
                     <Form onSubmit={addOrUpdateHowto}>

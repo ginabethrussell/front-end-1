@@ -2,9 +2,10 @@ import React, { useState, useContext, useEffect } from 'react'
 import { UserContext } from '../contexts/UserContext';
 import { axiosWithAuth } from '../utils/axiosWithAuth';
 import HowTo from './HowTo';
+import logo from '../logo.svg'
 
 import { Label, Input } from 'reactstrap';
-// Sample Data - will come from API
+// Sample Data - will come from api get request for howtos
 import testHowtos from '../data/howtos'
 
 
@@ -22,17 +23,20 @@ function HowTos() {
     }
   
     // get all howtos from the api and display when component mounts
+    // use an authorized get request to howtos route
     useEffect(()=> {
         axiosWithAuth().get('https://reqres.in/api/users')
         .then(res => {
             console.log(res);
             setError('');
             setIsLoading(false);
+            // using sample data to mock data return
             setHowtos(testHowtos)
         })
         .catch(err => console.log(err))
     },[])
 
+    // filter howtos by title when the howtos or searchterm changes
     useEffect(() => {
        setFilteredHowtos(howtos.filter(howto => howto.title.toLowerCase().includes(searchterm.toLowerCase())))
     }, [searchterm, howtos])
@@ -43,22 +47,17 @@ function HowTos() {
             <div className='howto-header'>
                 <h2>Welcome {user.username}</h2>    
                 <div className='formgroup'>
-                    <Label for='searchterm'>Search by Title</Label>
-                    <Input type='text' name='searchterm' id='searchterm' value={searchterm} onChange={handleChange}/>
+                    <Label style={{textAlign: 'right', marginRight: '8px'}}for='searchterm'>Search by Title</Label>
+                    <Input type='text' name='searchterm' id='searchterm' placeholder='enter a keyword to search' value={searchterm} onChange={handleChange}/>
                 </div>
             </div>
-            { isLoading? (<p>How-Tos are Loading</p>): (
+            { isLoading? (<div className='loading-howtos'><img src={logo} /><span>...Loading...</span></div>): (
                 <>
                 {filteredHowtos.map(howto => (
                     <HowTo key={howto.id} howto={howto}/>
                 ))}
                 </>
             )}
-            {/* <p>PrivateRoute for loggedin user/subscriber and user/creator</p>
-            <p>View all tutorials</p>
-            <p>Search for a tutorial</p>
-            <p>Like a tutorial</p>
-            <p>Save a tutorial?</p> */}
         </div>
     )
 }
