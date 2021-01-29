@@ -19,11 +19,6 @@ import {
   Nav,
   NavItem,
   NavLink,
-  UncontrolledDropdown,
-  DropdownToggle,
-  DropdownMenu,
-  DropdownItem,
-  NavbarText
 } from 'reactstrap';
 
 const initialUser = {
@@ -43,7 +38,7 @@ function App() {
       <Navbar color="dark" dark expand='md'>  
         <NavbarBrand>
           <img className='logo' style={{marginRight: '8px'}}src={logo} alt='logo' />
-          <a>How-Tos</a>
+          <button className='logo-text' disabled>How-Tos</button>
         </NavbarBrand>
         <NavbarToggler dark onClick={toggle} />
         <Collapse isOpen={isOpen} navbar>

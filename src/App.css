@@ -6,14 +6,6 @@
   font-family: 'Source Sans Pro', sans-serif;
 }
 
-/* .App nav {
-  width: 100%;
-  margin: 0 auto;
-  display: flex;
-  justify-content: space-between;
-  align-items: baseline;
-} */
-
 .App a.nav-link, .App a{
   text-decoration: none;
   padding: 5px 8px;
@@ -21,10 +13,12 @@
   color: white;
 }
 
-.App a.nav-link:hover{
-  color: gray;
+.logo-text {
+  color: white;
+  border: none;
+  outline: none;
+  background: transparent;
 }
-
 .App .logo {
   width: 30px;
   margin-right: 5px;
