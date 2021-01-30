@@ -72,17 +72,18 @@ function HowTos() {
             />
           </div>
         </div>
-        <div className='howto-wrapper'>
+        
         {isLoading ? (
             <p className='loading'><Spinner/> ...Loading How-Tos... <Spinner/></p>
         ) : (
           <>
             {filteredHowtos.map((howto) => (
-              <HowTo key={howto.id} howto={howto} />
+              <div className='howto-wrapper'>
+                <HowTo key={howto.id} howto={howto} />
+              </div>
             ))}
           </>
         )}
-        </div>
       </div>
     );
   }
