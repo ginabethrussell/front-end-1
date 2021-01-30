@@ -118,6 +118,7 @@ function Creator() {
         // complete authorized delete request with id in route
         //axiosWithAuth().delete('https://route/id)
         setCreatorHowtos(creatorHowtos.filter(howto => howto.id !== id))
+        window.scrollTo(0, 0);
     }
 
     const handleAdd = () => {
