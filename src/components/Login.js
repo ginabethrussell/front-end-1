@@ -50,7 +50,7 @@ function Login() {
     };
     
     // sample token for testing
-    const token = "QpwL5tke4Pnpja7X4";
+    // const token = "QpwL5tke4Pnpja7X4";
 
     // sample post request to login user
     // use axios to post user data, response should be token and user id
@@ -59,6 +59,7 @@ function Login() {
       .then((res) => {
         // will have token and id from backend api
         console.log(res);
+        const token = res.data.token;
         localStorage.setItem("token", token);
         // setUser from userCredentials.username and id from api response
         // Test with userCreator
