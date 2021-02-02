@@ -165,6 +165,14 @@ function Creator() {
             //axiosWithAuth().put(`http://localhost:4000/howtos/${editingId}`, newHowTo)
             .then(res =>{
                 console.log("editing response from server", res.data);
+                axiosWithAuth().get(`https://gbr-how-to.herokuapp.com/howtos`)
+                //axiosWithAuth().get('http://localhost:4000/howtos')
+                .then(res => {
+                console.log('resetting howto state after update', res.data);
+                const creatorHowTos = res.data.filter(howto => howto.creator_id === creator.id);
+                setCreatorHowtos(creatorHowTos);
+            })
+            .catch(err => console.log(err))
                 // const updatedHowtos = [...creatorHowtos];
                 // const update = updatedHowtos.map(howto => {
                 // if(howto.id === editingId){
@@ -172,7 +180,7 @@ function Creator() {
                 // }
                 //     return howto
                 // });
-                setCreatorHowtos(res.data);
+                // setCreatorHowtos(res.data);
                 setIsEditing(false);
                 setButtonText('Add How-To');
                 setIsAdding(false);
