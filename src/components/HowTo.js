@@ -1,6 +1,6 @@
 import React from 'react'
 import {
-    Card, CardText, CardBody,
+    Card, CardText, CardBody, CardImg,
     CardTitle, CardSubtitle, CardHeader
   } from 'reactstrap';
   
@@ -10,6 +10,7 @@ function HowTo(props) {
     console.log(howto)
     return (
         <Card>
+            <CardImg top width="100%" src={howto.image} alt={howto.title} />
             <CardHeader>
                 <CardTitle>{howto.title}</CardTitle>
                 <CardSubtitle>{howto.author}</CardSubtitle>

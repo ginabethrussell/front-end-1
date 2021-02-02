@@ -23,6 +23,7 @@ const initialCreator = {
 const initialFormValues = {
     title: '',
     author: '',
+    image: '',
     paragraphs: ['']
 }
 
@@ -189,6 +190,7 @@ function Creator() {
         }else if(isAdding){
             // change id to Number for db
             newHowTo.creator_id = creator.id;
+            console.log(newHowTo);
             // submit api request to post new howto
             axiosWithAuth().post(`https://gbr-how-to.herokuapp.com/howtos`, newHowTo)
             //axiosWithAuth().post(`http://localhost:4000/howtos`, newHowTo)
@@ -244,6 +246,16 @@ function Creator() {
                                 value={formValues.author}
                                 onChange={handleChange}
                                 required
+                                />
+                        </FormGroup>
+                        <FormGroup>
+                            <Label for='image'>Optional Image URL</Label>
+                            <Input type='url' 
+                                id='image'
+                                name='image'
+                                placeholder='enter the url for an image'
+                                value={formValues.image}
+                                onChange={handleChange}
                                 />
                         </FormGroup>
                         {formValues.paragraphs.map((paragraph, index) =>(

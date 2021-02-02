@@ -1,7 +1,7 @@
 import React from 'react'
 import {Button, ButtonGroup} from 'reactstrap';
 import {
-    Card, CardText, CardBody,
+    Card, CardText, CardBody, CardImg,
     CardTitle, CardSubtitle, CardHeader, CardFooter
   } from 'reactstrap';
 
@@ -11,6 +11,7 @@ function CreatorHowTo({howto, handleEdit, handleDelete}) {
     return (
         <div className='creator-howto-wrapper'>
             <Card>
+                <CardImg top width="100%" src={howto.image} alt={howto.title} />
                 <CardHeader> 
                     <CardTitle>{howto.title}</CardTitle>
                     <CardSubtitle>{howto.author}</CardSubtitle>
