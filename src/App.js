@@ -44,7 +44,7 @@ function App() {
         <Collapse isOpen={isOpen} navbar>
         <Nav className="ml-auto" navbar>
           <NavItem>
-            <NavLink style={{width: '100px', textAlign: 'center'}}href='https://tt88-how-to.netlify.app/'>Home</NavLink>
+            <NavLink style={{width: '100px', textAlign: 'center'}}href='https://gbr-howto-marketing.netlify.app/'>Home</NavLink>
           </NavItem>
           <NavItem style={{width: '100px', textAlign: 'center'}}>
             <NavLink tag={Link} to="/login">Login</NavLink>
