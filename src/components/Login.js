@@ -19,7 +19,7 @@ const initialUserCredentials = {
 function Login() {
   const [userCredentials, setUserCredentials] = useState(initialUserCredentials);
   const [loginError, setLoginError] = useState("");
-  const {setUser} = useContext(UserContext);
+  const {user, setUser} = useContext(UserContext);
   const history = useHistory();
 
   const handleChange = (e) => {
@@ -35,13 +35,18 @@ function Login() {
    
     // use axios to post user data, response should be token and user id
     axios
-      .post("https://gbr-how-to.herokuapp.com/users/login", userCredentials)
+      // .post("https://gbr-how-to.herokuapp.com/users/login", userCredentials)
+      .post("http://localhost:4000/users/login", userCredentials)
       .then((res) => {
         console.log(res.data);
         const token = res.data.token;
         localStorage.setItem("token", token);
-        setUser({username: userCredentials.username, id: res.data.id});
+        setUser({ ...user,
+            username: userCredentials.username,
+            id: res.data.id
+          });
         setLoginError("");
+        setUserCredentials(initialUserCredentials);
         history.push("/howtos");
       })
       .catch((err) => {

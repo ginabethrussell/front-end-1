@@ -1,6 +1,5 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { axiosWithAuth } from '../utils/axiosWithAuth';
-import axios from 'axios';
 import CreatorHowTo from './CreatorHowTo';
 import { UserContext } from '../contexts/UserContext';
 import deny from '../deny.svg';
@@ -13,10 +12,6 @@ import {
     Input,
     Spinner
   } from "reactstrap";
-
-
-// Sample Data - will come from API
-import testHowtos from '../data/howtos'
 
 const initialCreator = {
         id: '',
@@ -44,20 +39,7 @@ function Creator() {
     useEffect(() => {
         // get user with userid
         console.log(user.id)
-        // sample users stored on server
-        const userSubscriber = {
-            id: 1,
-            username: "user1",
-            password: "password",
-            role: "subscriber"
-          }
-             
-          const userCreator ={
-            id: 2,
-            username: "user2",
-            password: "abc123",
-            role: "creator"
-          } 
+    
         // use user.id pulled from UserContext to request user info to verify creator permissions
         const id = user.id;
         console.log('id', id)
@@ -111,8 +93,18 @@ function Creator() {
     const handleDelete = (id) => {
         console.log("creator wants to delete HowTo #", id);
         // complete authorized delete request with id in route
-        axiosWithAuth().delete(`https://gbr-how-to.herokuapp.com/howtos/${id}`)
-        .then(res => console.log(res))
+        // axiosWithAuth().delete(`https://gbr-how-to.herokuapp.com/howtos/${id}`)
+        axiosWithAuth().delete(`http://localhost:4000/howtos/${id}`)
+        .then(res => {
+            console.log('delete response', res);
+            // axiosWithAuth().get('https://gbr-how-to.herokuapp.com/howtos')
+            // .then(res => {
+            //     const creatorHowTos = res.data.filter(howto => howto.creator_id === creator.id);
+            //     console.log(creatorHowTos);
+            //     setCreatorHowtos(creatorHowTos);
+            // } )
+            // .catch(err => console.log(err))
+        })
         .catch(err => console.log(err))
         // setCreatorHowtos(creatorHowtos.filter(howto => howto.id !== id))
         window.scrollTo(0, 0);
@@ -167,26 +159,34 @@ function Creator() {
         e.preventDefault();
         const newHowTo = removeEmptyParagraphs();
         if(isEditing){
-            // submit api request to update howto with put request
-            // axiosWithAuth().put('route/:id', newHowTo);
-            console.log('updating howto #', editingId);
-            const updatedHowtos = [...creatorHowtos];
-            console.log(updatedHowtos);
-            const update = updatedHowtos.map(howto => {
+            // axiosWithAuth().put(`https://gbr-how-to.herokuapp.com/howtos/${editingId}`, newHowTo)
+            axiosWithAuth().put(`http://localhost:4000/howtos/${editingId}`, newHowTo)
+            .then(res =>{
+                console.log("response", res.data);
+                const updatedHowtos = [...creatorHowtos];
+                const update = updatedHowtos.map(howto => {
                 if(howto.id === editingId){
-                    return formValues;
+                    return res.data;
                 }
-                return howto
+                    return howto
+                });
+                setCreatorHowtos(update);
+                setIsEditing(false);
+                setButtonText('Add How-To');
+                setIsAdding(false);
             })
-            setCreatorHowtos(update);
-            setIsEditing(false);
-            setButtonText('Add How-To');
-            setIsAdding(false);
+            .catch(err => console.log(err));
         }else if(isAdding){
             // submit api request to post new howto
-            // axiosWithAuth().post('route', newHowTo);
-            setCreatorHowtos([...creatorHowtos, newHowTo]);
-            setIsAdding(false);
+            // axiosWithAuth().post(`https://gbr-how-to.herokuapp.com/howtos/${editingId}`, newHowTo)
+            axiosWithAuth().post(`http://localhost:4000/howtos`, newHowTo)
+            .then(res => {
+                console.log(res.data);
+                const addedHowto = res.data;
+                setCreatorHowtos([...creatorHowtos, addedHowto]);
+                setIsAdding(false);
+            })
+            .catch(err => console.log(err)) 
         }
         setFormValues(initialFormValues);
     }

@@ -38,7 +38,8 @@ function Signup() {
     
     // use axios to post user data, response should be token and user id
     axios
-      .post("https://gbr-how-to.herokuapp.com/users", userCredentials)
+      // .post("https://gbr-how-to.herokuapp.com/users", userCredentials)
+      .post("http://localhost:4000/users", userCredentials)
       .then((res) => {
         console.log(res);
         localStorage.setItem("token", res.data.token);
