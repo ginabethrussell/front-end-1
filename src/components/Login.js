@@ -35,8 +35,8 @@ function Login() {
    
     // use axios to post user data, response should be token and user id
     axios
-      // .post("https://gbr-how-to.herokuapp.com/users/login", userCredentials)
-      .post("http://localhost:4000/users/login", userCredentials)
+      .post("https://gbr-how-to.herokuapp.com/users/login", userCredentials)
+      //.post("http://localhost:4000/users/login", userCredentials)
       .then((res) => {
         console.log(res.data);
         const token = res.data.token;

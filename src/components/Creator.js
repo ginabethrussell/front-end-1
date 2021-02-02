@@ -12,6 +12,7 @@ import {
     Input,
     Spinner
   } from "reactstrap";
+import axios from 'axios';
 
 const initialCreator = {
         id: '',
@@ -43,6 +44,7 @@ function Creator() {
         // use user.id pulled from UserContext to request user info to verify creator permissions
         const id = user.id;
         console.log('id', id)
+        // axiosWithAuth().get(`http://localhost:4000/users/${id}`)
         axiosWithAuth().get(`https://gbr-how-to.herokuapp.com/users/${id}`)
         .then(res => {
             console.log(res.data);
@@ -61,6 +63,7 @@ function Creator() {
     useEffect(() => {
         // get all howtos and filter for creators howtos
         if (creator.role === 'creator'){
+            //axiosWithAuth().get(`http://localhost:4000/howtos`)
             axiosWithAuth().get('https://gbr-how-to.herokuapp.com/howtos')
             .then(res => {
                 console.log(res.data);
@@ -93,20 +96,17 @@ function Creator() {
     const handleDelete = (id) => {
         console.log("creator wants to delete HowTo #", id);
         // complete authorized delete request with id in route
-        // axiosWithAuth().delete(`https://gbr-how-to.herokuapp.com/howtos/${id}`)
-        axiosWithAuth().delete(`http://localhost:4000/howtos/${id}`)
+        axiosWithAuth().delete(`https://gbr-how-to.herokuapp.com/howtos/${id}`)
+        //axiosWithAuth().delete(`http://localhost:4000/howtos/${id}`)
         .then(res => {
-            console.log('delete response', res);
-            // axiosWithAuth().get('https://gbr-how-to.herokuapp.com/howtos')
-            // .then(res => {
-            //     const creatorHowTos = res.data.filter(howto => howto.creator_id === creator.id);
-            //     console.log(creatorHowTos);
-            //     setCreatorHowtos(creatorHowTos);
-            // } )
-            // .catch(err => console.log(err))
+            console.log('delete response', res.data);
+            axiosWithAuth().get(`https://gbr-how-to.herokuapp.com/howtos`)
+            //axiosWithAuth().get('http://localhost:4000/howtos')
+            .then(res => {
+                setCreatorHowtos(res.data);
+            })
         })
         .catch(err => console.log(err))
-        // setCreatorHowtos(creatorHowtos.filter(howto => howto.id !== id))
         window.scrollTo(0, 0);
     }
 
@@ -159,8 +159,8 @@ function Creator() {
         e.preventDefault();
         const newHowTo = removeEmptyParagraphs();
         if(isEditing){
-            // axiosWithAuth().put(`https://gbr-how-to.herokuapp.com/howtos/${editingId}`, newHowTo)
-            axiosWithAuth().put(`http://localhost:4000/howtos/${editingId}`, newHowTo)
+            axiosWithAuth().put(`https://gbr-how-to.herokuapp.com/howtos/${editingId}`, newHowTo)
+            //axiosWithAuth().put(`http://localhost:4000/howtos/${editingId}`, newHowTo)
             .then(res =>{
                 console.log("response", res.data);
                 const updatedHowtos = [...creatorHowtos];
@@ -177,19 +177,22 @@ function Creator() {
             })
             .catch(err => console.log(err));
         }else if(isAdding){
+            // change id to Number for db
+            newHowTo.creator_id = creator.id;
             // submit api request to post new howto
-            // axiosWithAuth().post(`https://gbr-how-to.herokuapp.com/howtos/${editingId}`, newHowTo)
-            axiosWithAuth().post(`http://localhost:4000/howtos`, newHowTo)
+            axiosWithAuth().post(`https://gbr-how-to.herokuapp.com/howtos`, newHowTo)
+            //axiosWithAuth().post(`http://localhost:4000/howtos`, newHowTo)
             .then(res => {
                 console.log(res.data);
-                const addedHowto = res.data;
-                setCreatorHowtos([...creatorHowtos, addedHowto]);
+                // const addedHowto = res.data;
+                setCreatorHowtos(res.data);
                 setIsAdding(false);
             })
             .catch(err => console.log(err)) 
         }
         setFormValues(initialFormValues);
     }
+
     if (creator.role === '') {
         return (
             <p className='loading'><Spinner/> ...Loading Creator... <Spinner/></p>
