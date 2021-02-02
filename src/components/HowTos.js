@@ -26,6 +26,7 @@ function HowTos() {
   useEffect(() => {
     axiosWithAuth()
       .get("https://gbr-how-to.herokuapp.com/howtos")
+      //.get('http://localhost:4000/howtos')
       .then((res) => {
         console.log(res);
         setError("");
