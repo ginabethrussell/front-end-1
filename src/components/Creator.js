@@ -165,14 +165,14 @@ function Creator() {
             //axiosWithAuth().put(`http://localhost:4000/howtos/${editingId}`, newHowTo)
             .then(res =>{
                 console.log("editing response from server", res.data);
-                const updatedHowtos = [...creatorHowtos];
-                const update = updatedHowtos.map(howto => {
-                if(howto.id === editingId){
-                    return res.data;
-                }
-                    return howto
-                });
-                setCreatorHowtos(update);
+                // const updatedHowtos = [...creatorHowtos];
+                // const update = updatedHowtos.map(howto => {
+                // if(howto.id === editingId){
+                //     return res.data;
+                // }
+                //     return howto
+                // });
+                setCreatorHowtos(res.data);
                 setIsEditing(false);
                 setButtonText('Add How-To');
                 setIsAdding(false);
