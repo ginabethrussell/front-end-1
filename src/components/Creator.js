@@ -185,9 +185,9 @@ function Creator() {
             axiosWithAuth().post(`https://gbr-how-to.herokuapp.com/howtos`, newHowTo)
             //axiosWithAuth().post(`http://localhost:4000/howtos`, newHowTo)
             .then(res => {
-                console.log('response to adding howto from server', res.data);
-                // const addedHowto = res.data;
-                setCreatorHowtos(res.data);
+                console.log('resetting howto state after adding howto', res.data);
+                const creatorHowTos = res.data.filter(howto => howto.creator_id === creator.id);
+                setCreatorHowtos(creatorHowTos);
                 setIsAdding(false);
             })
             .catch(err => console.log(err)) 
