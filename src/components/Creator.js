@@ -47,7 +47,7 @@ function Creator() {
         // axiosWithAuth().get(`http://localhost:4000/users/${id}`)
         axiosWithAuth().get(`https://gbr-how-to.herokuapp.com/users/${id}`)
         .then(res => {
-            console.log(res.data);
+            console.log('getting users id from server', res.data);
             setCreator({
                 ...creator, 
                 id: res.data.id, 
@@ -66,7 +66,7 @@ function Creator() {
             //axiosWithAuth().get(`http://localhost:4000/howtos`)
             axiosWithAuth().get('https://gbr-how-to.herokuapp.com/howtos')
             .then(res => {
-                console.log(res.data);
+                console.log('getting howtos from server for creator page', res.data);
                 console.log(creator.id);
                 const creatorHowTos = res.data.filter(howto => howto.creator_id === creator.id);
                 console.log(creatorHowTos);
@@ -99,11 +99,13 @@ function Creator() {
         axiosWithAuth().delete(`https://gbr-how-to.herokuapp.com/howtos/${id}`)
         //axiosWithAuth().delete(`http://localhost:4000/howtos/${id}`)
         .then(res => {
-            console.log('delete response', res.data);
+            console.log('delete response from server', res.data);
             axiosWithAuth().get(`https://gbr-how-to.herokuapp.com/howtos`)
             //axiosWithAuth().get('http://localhost:4000/howtos')
             .then(res => {
-                setCreatorHowtos(res.data);
+                console.log('resetting howto state after delete', res.data);
+                const creatorHowTos = res.data.filter(howto => howto.creator_id === creator.id);
+                setCreatorHowtos(creatorHowTos);
             })
         })
         .catch(err => console.log(err))
@@ -162,7 +164,7 @@ function Creator() {
             axiosWithAuth().put(`https://gbr-how-to.herokuapp.com/howtos/${editingId}`, newHowTo)
             //axiosWithAuth().put(`http://localhost:4000/howtos/${editingId}`, newHowTo)
             .then(res =>{
-                console.log("response", res.data);
+                console.log("editing response from server", res.data);
                 const updatedHowtos = [...creatorHowtos];
                 const update = updatedHowtos.map(howto => {
                 if(howto.id === editingId){
@@ -183,7 +185,7 @@ function Creator() {
             axiosWithAuth().post(`https://gbr-how-to.herokuapp.com/howtos`, newHowTo)
             //axiosWithAuth().post(`http://localhost:4000/howtos`, newHowTo)
             .then(res => {
-                console.log(res.data);
+                console.log('response to adding howto from server', res.data);
                 // const addedHowto = res.data;
                 setCreatorHowtos(res.data);
                 setIsAdding(false);
