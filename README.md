@@ -2,7 +2,7 @@
 [Product Vision Document](https://docs.google.com/document/d/11nPLXuvIIXRODc8R4q-oEy7gNkcC6ahP5cfVi1w_SOs/edit?usp=sharing)
 
 ## Marketing Landing Page Deployment
-[https://tt88-how-to.netlify.app/](https://tt88-how-to.netlify.app/)
+[https://gbr-howto-marketing.netlify.app/](https://gbr-howto-marketing.netlify.app/)
 
 ## Frontend React Page Deployment
 [https://tt88-frontend-howto.netlify.app/](https://tt88-frontend-howto.netlify.app/)
