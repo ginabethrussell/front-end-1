@@ -14,7 +14,7 @@ import {
 const initialUserCredentials = {
   username: "",
   password: "",
-  role: "",
+  role: "subscriber",
 };
 
 function Signup() {
@@ -35,41 +35,15 @@ function Signup() {
   const signupUser = (e) => {
     e.preventDefault();
     console.log(userCredentials);
-    // sample user credentials 
-    const userSubscriber = {
-      username: "user1Subscriber",
-      password: "password",
-      role: "subscriber"
-    }
-       
-    // const userCreator ={
-    //   username: "user2Creator",
-    //   password: "abc123",
-    //   role: "creator"
-    // } 
-
-    const reqresCredentials = {
-      email: "lambda-student@lambda.com",
-      password: "i<3Lambd4",
-      role: 'subscriber'
-    };
-   
-    // sample token for testing api
-    // sample returned data from api for testing
-    // api will return id and token
-    const token = "QpwL5tke4Pnpja7X4";
-
-    // sample post request to login user
+    
     // use axios to post user data, response should be token and user id
     axios
-      .post("https://reqres.in/api/users", reqresCredentials)
+      .post("https://gbr-how-to.herokuapp.com/users", userCredentials)
       .then((res) => {
-        // will have token from backend api
-        // Test with userSubscriber
         console.log(res);
-        localStorage.setItem("token", token);
+        localStorage.setItem("token", res.data.token);
         setLoginError("");
-        setUser({username: userSubscriber.username, id: 1})
+        setUser({username: userCredentials.username, id: res.data.user.id})
         history.push("/howtos");
       })
       .catch((err) => {

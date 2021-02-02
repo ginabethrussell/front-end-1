@@ -43,6 +43,7 @@ function Creator() {
     // request user from api and check for role, permission to create
     useEffect(() => {
         // get user with userid
+        console.log(user.id)
         // sample users stored on server
         const userSubscriber = {
             id: 1,
@@ -59,21 +60,15 @@ function Creator() {
           } 
         // use user.id pulled from UserContext to request user info to verify creator permissions
         const id = user.id;
-        // axiosWithAuth().get(`http://reqres.in/api/user/${id}`)
-        axios.get(`https://reqres.in/api/user/${id}`)
+        console.log('id', id)
+        axiosWithAuth().get(`https://gbr-how-to.herokuapp.com/users/${id}`)
         .then(res => {
-            console.log(res);
-            // setCreator({
-            //     ...creator, 
-            //     id: userSubscriber.id, 
-            //     username: userSubscriber.username,
-            //     role: userSubscriber.role
-            // });
+            console.log(res.data);
             setCreator({
                 ...creator, 
-                id: userCreator.id, 
-                username: userCreator.username,
-                role: userCreator.role
+                id: res.data.id, 
+                username: res.data.username,
+                role: res.data.role
             });
         })
         .catch(err => console.log(err))
@@ -84,11 +79,11 @@ function Creator() {
     useEffect(() => {
         // get all howtos and filter for creators howtos
         if (creator.role === 'creator'){
-            axiosWithAuth().get('https://reqres.in/api/users')
+            axiosWithAuth().get('https://gbr-how-to.herokuapp.com/howtos')
             .then(res => {
-                console.log(res);
+                console.log(res.data);
                 console.log(creator.id);
-                const creatorHowTos = testHowtos.filter(howto => howto.creator_id === creator.id);
+                const creatorHowTos = res.data.filter(howto => howto.creator_id === creator.id);
                 console.log(creatorHowTos);
                 setCreatorHowtos(creatorHowTos);
             })
@@ -116,8 +111,10 @@ function Creator() {
     const handleDelete = (id) => {
         console.log("creator wants to delete HowTo #", id);
         // complete authorized delete request with id in route
-        //axiosWithAuth().delete('https://route/id)
-        setCreatorHowtos(creatorHowtos.filter(howto => howto.id !== id))
+        axiosWithAuth().delete(`https://gbr-how-to.herokuapp.com/howtos/${id}`)
+        .then(res => console.log(res))
+        .catch(err => console.log(err))
+        // setCreatorHowtos(creatorHowtos.filter(howto => howto.id !== id))
         window.scrollTo(0, 0);
     }
 

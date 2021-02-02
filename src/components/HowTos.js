@@ -6,7 +6,7 @@ import HowTo from "./HowTo";
 
 import { Label, Input } from "reactstrap";
 // Sample Data - will come from api get request for howtos
-import testHowtos from "../data/howtos";
+// import testHowtos from "../data/howtos";
 
 // component will display all existing howtos for logged in user
 function HowTos() {
@@ -25,13 +25,12 @@ function HowTos() {
   // use an authorized get request to howtos route
   useEffect(() => {
     axiosWithAuth()
-      .get("https://reqres.in/api/users")
+      .get("https://gbr-how-to.herokuapp.com/howtos")
       .then((res) => {
         console.log(res);
         setError("");
         setIsLoading(false);
-        // using sample data to mock data return
-        setHowtos(testHowtos);
+        setHowtos(res.data);
       })
       .catch((err) => {
         console.log(err);

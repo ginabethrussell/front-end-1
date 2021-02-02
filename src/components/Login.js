@@ -32,48 +32,23 @@ function Login() {
   const loginUser = (e) => {
     e.preventDefault();
     console.log(userCredentials);
-    
-    // sample user credentials
-    // const userSubscriber = {
-    //   id: 1,
-    //   username: "user1Subscriber",
-    // }
-       
-    const userCreator ={
-      id: 2,
-      username: "user2Creator",
-    } 
-
-    const reqresCredentials = {
-      email: "lambda-student@lambda.com",
-      password: "i<3Lambd4",
-    };
-    
-    // sample token for testing
-    // const token = "QpwL5tke4Pnpja7X4";
-
-    // sample post request to login user
+   
     // use axios to post user data, response should be token and user id
     axios
-      .post("https://reqres.in/api/users", reqresCredentials)
+      .post("https://gbr-how-to.herokuapp.com/users/login", userCredentials)
       .then((res) => {
-        // will have token and id from backend api
-        console.log(res);
+        console.log(res.data);
         const token = res.data.token;
         localStorage.setItem("token", token);
-        // setUser from userCredentials.username and id from api response
-        // Test with userCreator
-        setUser(userCreator);
+        setUser({username: userCredentials.username, id: res.data.id});
         setLoginError("");
-        // send logged in user to howtos page
         history.push("/howtos");
       })
       .catch((err) => {
           // api returns that user is not found. Set error message to be displayed.
           console.log(err);
           setLoginError('User not found. Please signup for an account.');
-      });
-      
+      });  
     setUserCredentials(initialUserCredentials);
   };
 
