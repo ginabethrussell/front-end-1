@@ -5,8 +5,6 @@ import {Spinner} from 'reactstrap';
 import HowTo from "./HowTo";
 
 import { Label, Input } from "reactstrap";
-// Sample Data - will come from api get request for howtos
-// import testHowtos from "../data/howtos";
 
 // component will display all existing howtos for logged in user
 function HowTos() {
@@ -26,7 +24,7 @@ function HowTos() {
   useEffect(() => {
     axiosWithAuth()
       .get("https://gbr-how-to.herokuapp.com/howtos")
-      //.get('http://localhost:4000/howtos')
+      //.get('http://localhost:5000/howtos')
       .then((res) => {
         console.log(res);
         setError("");
