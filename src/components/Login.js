@@ -54,7 +54,7 @@ function Login() {
           console.log(err);
           setLoginError('User not found. Please signup for an account.');
       });  
-    setUserCredentials(initialUserCredentials);
+   
   };
 
   return (

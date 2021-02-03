@@ -45,13 +45,13 @@ function Signup() {
         localStorage.setItem("token", res.data.token);
         setLoginError("");
         setUser({username: userCredentials.username, id: res.data.user.id})
+        setUserCredentials(initialUserCredentials);
         history.push("/howtos");
       })
       .catch((err) => {
           console.log(err);
           setLoginError('An error occurred. Please try again.');
       });
-    setUserCredentials(initialUserCredentials);
   };
 
   return (

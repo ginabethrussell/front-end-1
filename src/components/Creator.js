@@ -169,12 +169,12 @@ function Creator() {
                 axiosWithAuth().get(`https://gbr-how-to.herokuapp.com/howtos`)
                 //axiosWithAuth().get('http://localhost:5000/howtos')
                 .then(res => {
-                console.log('resetting howto state after update', res.data);
-                const creatorHowTos = res.data.filter(howto => howto.creator_id === creator.id);
-                setCreatorHowtos(creatorHowTos);
-            })
-            .catch(err => console.log(err))
-                
+                    console.log('resetting howto state after update', res.data);
+                    const creatorHowTos = res.data.filter(howto => howto.creator_id === creator.id);
+                    setCreatorHowtos(creatorHowTos);
+                    setFormValues(initialFormValues);
+                })
+                .catch(err => console.log(err))  
                 setIsEditing(false);
                 setButtonText('Add How-To');
                 setIsAdding(false);
@@ -192,10 +192,11 @@ function Creator() {
                 const creatorHowTos = res.data.filter(howto => howto.creator_id === creator.id);
                 setCreatorHowtos(creatorHowTos);
                 setIsAdding(false);
+                setFormValues(initialFormValues);
             })
             .catch(err => console.log(err)) 
         }
-        setFormValues(initialFormValues);
+        
     }
 
     if (creator.role === '') {
