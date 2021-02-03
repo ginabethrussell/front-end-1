@@ -53,7 +53,9 @@ function HowTos() {
         console.log(res);
         setError("");
         setIsLoading(false);
-        setHowtos(res.data);
+        const howtos = res.data;
+        howtos.sort((a, b) => (a.likes > b.likes) ? -1 : 1)
+        setHowtos(howtos);
       })
       .catch((err) => {
         console.log(err);
