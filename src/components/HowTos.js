@@ -19,6 +19,30 @@ function HowTos() {
     setSearchterm(e.target.value);
   };
 
+  const handleLike = (id) => {
+    const number = 1;
+    axiosWithAuth().put(`https://gbr-how-to.herokuapp.com/howtos/${id}/likes`, number)
+    //axiosWithAuth().put(`http://localhost:5000/howtos/${id}/likes`, number)
+    .then(res => {
+      console.log(res.data);
+      axiosWithAuth()
+      .get("https://gbr-how-to.herokuapp.com/howtos")
+      //.get('http://localhost:5000/howtos')
+      .then((res) => {
+        console.log(res);
+        setError("");
+        setIsLoading(false);
+        const howtos = res.data;
+        howtos.sort((a, b) => (a.likes > b.likes) ? -1 : 1)
+        setHowtos(howtos);
+      })
+      .catch((err) => {
+        console.log(err);
+        setError("Unable to load How-tos. Please try again later.");
+      });
+    })
+  }
+
   // get all howtos from the api and display when component mounts
   // use an authorized get request to howtos route
   useEffect(() => {
@@ -77,7 +101,7 @@ function HowTos() {
           <>
             {filteredHowtos.map((howto) => (
               <div className='howto-wrapper'>
-                <HowTo key={howto.id} howto={howto} />
+                <HowTo key={howto.id} howto={howto} handleLike={handleLike}/>
               </div>
             ))}
           </>
